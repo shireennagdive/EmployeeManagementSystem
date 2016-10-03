@@ -1,8 +1,12 @@
 package com.flp.ems.domain;
 
 public class Project {
-	static int project_id;
+	static int project_id=0;
 	String name,description;
+	public Project() {
+		project_id++;
+		// TODO Auto-generated constructor stub
+	}
 	public String getName() {
 		return name;
 	}

@@ -1,9 +1,11 @@
 package com.flp.ems.domain;
 
 public class Department {
-static int	department_id;
+static int	department_id=0;
 private String name,description;
-
+public Department(){
+	department_id++;
+}
 public String getName() {
 	return name;
 }

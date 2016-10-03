@@ -1,23 +1,51 @@
 package com.flp.ems.domain;
 
+import java.util.Date;
+
 public class Employee {
 	private static int count=0;
-//	private int Emp_Id;
+	private int Emp_Id;
 	public Employee() {
 		count++;
+		Emp_Id=count;
 	}
-	private String Name,kin_Id,email_id,adress,dateofjoin,dateofbirth;
-	public String getDateofjoin() {
+	int DepartmentId,ProjectID,RoleID;
+	
+	private String Name,kin_Id,email_id,adress;
+	Date dateofjoin;
+	Date dateofbirth;
+	public int getDepartmentId() {
+		return DepartmentId;
+	}
+	public void setDepartmentId(int departmentId) {
+		DepartmentId = departmentId;
+	}
+	public int getProjectID() {
+		return ProjectID;
+	}
+	public void setProjectID(int projectID) {
+		ProjectID = projectID;
+	}
+	public int getRoleID() {
+		return RoleID;
+	}
+	public void setRoleID(int roleID) {
+		RoleID = roleID;
+	}
+	public Date getDateofjoin() {
 		return dateofjoin;
 	}
-	public void setDateofjoin(String dateofjoin) {
+	public void setDateofjoin(Date dateofjoin) {
 		this.dateofjoin = dateofjoin;
 	}
-	public String getDateofbirth() {
+	public Date getDateofbirth() {
 		return dateofbirth;
 	}
-	public void setDateofbirth(String dateofbirth) {
-		this.dateofbirth = dateofbirth;
+	public int getEmp_Id() {
+		return Emp_Id;
+	}
+	public void setDateofbirth(Date date) {
+		this.dateofbirth = date;
 	}
 	private long phone_no;
 	@Override

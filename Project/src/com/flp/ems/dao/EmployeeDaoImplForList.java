@@ -36,6 +36,7 @@ public class EmployeeDaoImplForList implements IemployeeDao {
 	    }
 		this.getAllEmployee();
 	}
+	
 	public void RemoveEmployee(String temp){
 		int flag=0;
 		//String c=e.getKin_Id();
@@ -47,6 +48,7 @@ public class EmployeeDaoImplForList implements IemployeeDao {
 	    }
 		this.getAllEmployee();
 	} 
+	
 	public void SearchEmployee(String id){
 		int flag=0;
 		for(Employee e : list){
@@ -66,7 +68,7 @@ public class EmployeeDaoImplForList implements IemployeeDao {
 			System.out.println("Empty");
 		}else{
 		for(Employee e : list){
-			System.out.println(e.getName()+" "+e.getAdress()+" "+e.getDateofbirth()+" "+e.getDateofjoin()+" "+e.getEmail_id()+" "+e.getKin_Id()+" "+e.getPhone_no());
+			System.out.println(e.getEmp_Id()+" "+e.getName()+" "+e.getAdress()+" "+e.getDateofbirth()+" "+e.getDateofjoin()+" "+e.getEmail_id()+" "+e.getKin_Id()+" "+e.getPhone_no());
 		}
 		}
 	}

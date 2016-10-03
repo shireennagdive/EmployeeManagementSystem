@@ -55,6 +55,7 @@ public class UserInteraction {
 		s=scan.next();
 		hm.put("ProjectID",s);
 		service.ModifyEmployee(hm);
+		
 	}
 	public void RemoveEmployee(){
 		System.out.println("Enter the id of Employee you want to remove : ");
