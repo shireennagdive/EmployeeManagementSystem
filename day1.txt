@@ -1,0 +1,38 @@
+
+DAY1
+1.learn bash script,automate simple things //scripting very imp
+2.comand prompt important
+3.javac pointing elsewhere..java takes other jdk..happens when we have multiple jdks.
+4.Try to write a bash script or a file with all commands to u know automate the commands
+5.java -cp "." <class_file_name> //cp stands for classpath
+6.javac -d ../bin <.java file> //it redirects the class file after compilation to the specified path..in this case 
+7.del <file_name> //rm in linux //to delete a file
+8.dir //to view the directory contents //ls in linux
+9.spawning threads
+10.jvm is somewhat like a hypervisor
+11.jre jdk jvm difference
+12.eclipse has its own compiler
+13.profiling in eclipse
+14.sonarcube new tool in market for stattic code analysis.
+applicatn & process difference.
+15.we are application developers..system developers are different.
+16.mozzila oops
+17.4 pillars of oops
+18.polymorphism and inheritance closely related ..lllrly abstraction and encapsulation closesly related
+
+
+#describe a person
+name
+age
+gender
+height
+blood group
+contact number
+adhar card number
+
+DAY2
+1.singleton classes...private constructor
+2.main me fucncion calls are executed
+3.stack frame hota hai main me
+4.stack heap & .....
+5.
