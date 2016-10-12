@@ -1,7 +1,9 @@
 package com.flp.ems.view;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +30,8 @@ public class UserServlet extends HttpServlet {
     String destinationPage = null; 
     HashMap<String,String> hm=null;
     EmployeeServiceImpl service=null;
+    PrintWriter out=null;
+    List<HashMap<String, String>> mapList=null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -58,15 +62,29 @@ public class UserServlet extends HttpServlet {
         
         // perform action
         if(GETALL_ACTION.equals(actionName))
-        {            
+        {     
+        	
+        	service = new EmployeeServiceImpl();
+        	out=response.getWriter();
+        	mapList = service.getAllEmployee();
+    		for(int i=0;i<mapList.size();i++){
+    			hm=mapList.get(i);
+    			for (String key: hm.keySet()){
+    	            String value = hm.get(key);  
+    	            out.println(key + " : " + value);  
+    	}
+    			out.println();
+    		}
+    	
             //TODO 4 
 			//Use carDao to get the list of the cars
 			//Set the list in request with attribute name as 'carList'
 			//Set the destination page to carList.jsp
 			
-        }
+	}
         else if(ADD_ACTION.equals(actionName))
         {
+        	System.out.println("actionName is : "+actionName);
         	service = new EmployeeServiceImpl();
         	hm=new HashMap<String,String>();
 			hm.put("Name",request.getParameter("Name"));
@@ -86,7 +104,17 @@ public class UserServlet extends HttpServlet {
         }  
         else if(MODIFY_ACTION.equals(actionName))
         {
-			
+        	System.out.println("actionName is : "+actionName);
+        	service = new EmployeeServiceImpl();
+        	hm = new HashMap<String,String>();
+    		
+    			hm.put("KinID",request.getParameter("KinID"));
+    			hm.put("Name",request.getParameter("Name"));
+    			hm.put("EmailID",request.getParameter("EmailID"));
+    		    hm.put("Adress",request.getParameter("Adress"));
+    		    hm.put("PhoneNumber",request.getParameter("PhoneNumber"));
+    		    hm.put("ProjectID",request.getParameter("ProjectID"));
+    		    service.ModifyEmployee(hm);
         	//TODO 6 
 			//Get the car id from request, with parameter name as 'id'
 			//Find the respective car (CarDTO) from carDAO using appropriate API of DAO
@@ -95,7 +123,11 @@ public class UserServlet extends HttpServlet {
             
         }        
         else if(SEARCH_ACTION.equals(actionName))
-        {
+        {	out=response.getWriter();
+        	service = new EmployeeServiceImpl();hm=service.SearchEmployee(request.getParameter("KinID"),request.getParameter("Name"),request.getParameter("EmailID"));
+    		for (String key: hm.keySet()){
+                String value = hm.get(key);  
+                out.println(key + " " + value);  
 			//TODO 7 
 			//Create a new CarDTO
 			//set the properties of the DTO from request parameters
@@ -104,10 +136,12 @@ public class UserServlet extends HttpServlet {
 			//Set the found cars in request with name as 'carList'
 			//Set the destination page to carList.jsp
 			
-            
+    		}
         }  
         else if(REMOVE_ACTION.equals(actionName))
         {
+        	service = new EmployeeServiceImpl();
+        	service.RemoveEmployee(request.getParameter("KinID"));
             //TODO 8 
 			//Get the ids of all cars to be deleted from request
 			//Use appropriate api of DAO to delete all cars 
