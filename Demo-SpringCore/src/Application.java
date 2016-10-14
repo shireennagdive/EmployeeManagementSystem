@@ -20,8 +20,6 @@ public class Application {
 		
 		System.out.println(serviceRef.getMessages());
 		
-		
-		
 		ApplicationContext appContext2 = new FileSystemXmlApplicationContext("config/applicationContext.xml");
 		System.out.println(appContext2);
 		
