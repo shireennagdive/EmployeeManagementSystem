@@ -1,9 +1,11 @@
 package com.cg;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import com.cg.dao.impl.JDBCCarDAO;
 import com.cg.dto.CarDTO;
 import com.cg.util.DBUtility;
 import com.cg.util.ServiceLocatorException;
+
+import sun.font.CreatedFontTracker;
 
 //TODO 1 Import appropriate classes
 
@@ -27,6 +31,7 @@ import com.cg.util.ServiceLocatorException;
  *
  */
 
+
 public class ControllerServlet extends HttpServlet
 {
     private static final String ACTION_KEY = "action";
@@ -36,6 +41,7 @@ public class ControllerServlet extends HttpServlet
     private static final String EDIT_CAR_ACTION = "editCar";
     private static final String DELETE_CAR_ACTION = "deleteCar";
     private static final String ERROR_KEY = "errorMessage";
+    List<CarDTO> list = new ArrayList<CarDTO>();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -95,16 +101,18 @@ public class ControllerServlet extends HttpServlet
 	        	//Set the list in request with attribute name as 'carList'
 			request.setAttribute("carList",car);
 	        	//Set the destination page to carList.jsp
-        	destinationPage="carList.jsp";
+        	destinationPage="/carList.jsp";
 			
         }
         else if(ADD_CAR_ACTION.equals(actionName))
         {
 			//TODO 5 
 			//Create a new CarDTO and set in request with attribute name as 'car'
+        	carddto=new CarDTO();
 			request.setAttribute("car",carddto);
         	//Set the destination page to carForm.jsp
-            destinationPage="carForm.jsp";
+            destinationPage="/carForm.jsp";
+            System.out.println("in addcar");  
         }  
         else if(EDIT_CAR_ACTION.equals(actionName))
         {
@@ -117,20 +125,34 @@ public class ControllerServlet extends HttpServlet
         	//Set the found car in request with name as 'car'
 			request.setAttribute("car",carddto);
         	//Set the destination page to carForm.jsp
-            destinationPage="carForm.jsp";
+            destinationPage="/carForm.jsp";
+            
         }        
         else if(SAVE_CAR_ACTION.equals(actionName))
         {
 			//TODO 7 
 			//Create a new CarDTO
+        	int id;
+        	carDAO = new JDBCCarDAO();
+        	car = new ArrayList<CarDTO>();
+        	System.out.println("in save car ");
         	carddto=new CarDTO();
 			//set the properties of the DTO from request parameters
-			carddto.setId((Integer.parseInt(request.getParameter("id"))));
+			id=Integer.parseInt(request.getParameter("id"));
+        	carddto.setId(id);
 			carddto.setMake(request.getParameter("make"));
 			carddto.setModel(request.getParameter("model"));
 			carddto.setModelYear(request.getParameter("modelYear"));
-			;
+			if(id==-1){
+				carDAO.create(carddto);
+			}else{
+				carDAO.update(carddto);
+			}
 			
+			car.add(carddto);
+			request.setAttribute("carList",car);
+			destinationPage="/carList.jsp";
+		   //   carDAO.create(carddto);//see
         	//If it is a new car then invoke create api of DAO else update api
 			
         	//Get all the Cars using DAO
@@ -140,12 +162,12 @@ public class ControllerServlet extends HttpServlet
 			
 			
         	//Set the destination page to carList.jsp
-			destinationPage="carList.jsp";
             
         }  
         else if(DELETE_CAR_ACTION.equals(actionName))
         {
-            //TODO 8 
+        	System.out.println("in delete car");
+        	//TODO 8 
 			//Get the ids of all cars to be deleted from request
         	String array[]=request.getParameterValues(DELETE_CAR_ACTION);
 			//Use appropriate api of DAO to delete all cars 
@@ -158,7 +180,7 @@ public class ControllerServlet extends HttpServlet
 			request.setAttribute("carList",car.get(i));
 			}
 			//Set the destination page to carList.jsp
-            destinationPage="carList.jsp";
+            destinationPage="/carList.jsp";
         }                    
         else
         {
@@ -166,7 +188,10 @@ public class ControllerServlet extends HttpServlet
             request.setAttribute(ERROR_KEY, errorMessage);
         }
 
-
+        System.out.println("outside all ifs and going from : "+actionName);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destinationPage);
+        System.out.println("vavlue : +"+dispatcher);
+        dispatcher.forward(request,response);
         //TODO 9 Use appropriate Servlet API to forward the request to 
 		//appropriate destination page set in above if else blocks depending on action.
         

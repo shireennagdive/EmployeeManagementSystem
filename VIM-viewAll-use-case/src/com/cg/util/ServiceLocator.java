@@ -53,7 +53,9 @@ public class ServiceLocator {
         try {
             Context ctx = new InitialContext();
             Context envContext  = (Context)ctx.lookup("java:/comp/env");
-			//TODO 4 Use an API to look up the datasource 
+          dataSource= (DataSource)envContext.lookup(dataSourceJndiName);
+		
+            //TODO 4 Use an API to look up the datasource 
             
 			//using jndi name passed as a parameter to this method
 			// and set the local variable dataSource in TODO 3
