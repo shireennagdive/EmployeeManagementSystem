@@ -12,6 +12,6 @@
 <%-- Use here JSP include directive to include "showImage.jsp" --%> 
 </p>
 	
-    <a href="controller?action=addCar<%-- Set the value for 'action' parameter to 'viewCarList' --%>">View Inventory</a> 
+    <a href="controller?action=viewCarList">View Inventory</a> 
   </body>
 </html>

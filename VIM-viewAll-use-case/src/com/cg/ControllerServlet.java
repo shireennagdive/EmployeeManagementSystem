@@ -97,6 +97,7 @@ public class ControllerServlet extends HttpServlet
         		
 	            //TODO 4 
 				//Use carDao to get the list of the cars
+        	carDAO=new JDBCCarDAO();
         	car=carDAO.findAll();
 	        	//Set the list in request with attribute name as 'carList'
 			request.setAttribute("carList",car);
@@ -119,9 +120,10 @@ public class ControllerServlet extends HttpServlet
 			//TODO 6 
 			//Get the car id from request, with parameter name as 'id'
 			String carID=request.getParameter("id");
-			CarDAO carddao=new JDBCCarDAO();
+			System.out.println("id is  :"+carID);
+			carDAO=new JDBCCarDAO();
 			//Find the respective car (CarDTO) from carDAO using appropriate API of DAO
-			carddto=carddao.findById(Integer.parseInt(carID));
+			carddto=carDAO.findById(Integer.parseInt(carID));
         	//Set the found car in request with name as 'car'
 			request.setAttribute("car",carddto);
         	//Set the destination page to carForm.jsp
@@ -169,9 +171,11 @@ public class ControllerServlet extends HttpServlet
         	System.out.println("in delete car");
         	//TODO 8 
 			//Get the ids of all cars to be deleted from request
-        	String array[]=request.getParameterValues(DELETE_CAR_ACTION);
+        	String array[]=request.getParameterValues("id");
 			//Use appropriate api of DAO to delete all cars 
-			carDAO=new JDBCCarDAO();
+			
+        	System.out.println(array);
+        	carDAO=new JDBCCarDAO();
         	carDAO.delete(array);
         	//Get all the Cars using DAO
 			car=carDAO.findAll();
