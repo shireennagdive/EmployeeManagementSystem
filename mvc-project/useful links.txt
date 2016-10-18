@@ -1,0 +1,39 @@
+http://www.coderpanda.com/chat-application-in-java/
+http://cs.lmu.edu/~ray/notes/javanetexamples/
+http://pirate.shu.edu/~wachsmut/Teaching/CSAS2214/Virtual/Lectures/chat-client-server.html
+https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html
+tutorialspoint http read pura
+http://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art034
+ServletCOnfig
+ServletContext
+postman ka get and post methods
+http://www.coderpanda.com/jndi-tutorial/
+slideshare mvc
+http://www.javajee.com/application-request-session-and-page-scopes-in-servlets-and-jsps
+standard actions
+custion actions
+in jsp instead of 
+scripltes + declaarations
+1.create thc (.java)
+2.declare tld (.tld)
+3.use jsp  (.jsp)
+ioC (General  Pattern) ->> DI(specific pattern)
+Jndi application <-lookup from java application..()datasource
+
+..demo-spring
+..demo-spring-core
+..demo-spring.mvc
+
+queryforobject jdbc template ka method..column name and property name should match
+
+required,controller,component,service -->> annotations
+
+docs oracle objectstreams
+
+rmi trails
+Generics see full
+dynamic proxying
+serialiazation
+codebase to the client
+
+retrieva paraamter frm url
