@@ -26,6 +26,7 @@ public class UserServlet extends HttpServlet {
     private static final String SEARCH_ACTION = "search";
     private static final String MODIFY_ACTION = "modify";
     private static final String REMOVE_ACTION = "remove";
+    private static final String SAVE_ACTION = "save";
     private static final String ERROR_KEY = "errorMessage";
     String destinationPage = null; 
     HashMap<String,String> hm=null;
@@ -88,15 +89,8 @@ public class UserServlet extends HttpServlet {
         	System.out.println("actionName is : "+actionName);
         	service = new EmployeeServiceImpl();
         	hm=new HashMap<String,String>();
-			hm.put("Name",request.getParameter("Name"));
-			hm.put("PhoneNumber",request.getParameter("PhoneNumber"));
-			hm.put("Adress",request.getParameter("Adress"));
-			hm.put("DateOfBirth",request.getParameter("DateOfBirth"));
-			hm.put("DateOfJoining",request.getParameter("DateOfJoining"));
-			hm.put("DepartmentID",request.getParameter("DepartmentID"));
-			hm.put("ProjectID",request.getParameter("ProjectID"));
-			hm.put("RoleID",request.getParameter("RoleID"));
-			service.AddEmployee(hm);
+        	request.setAttribute("emp", hm);
+			destinationPage="EmpForm.jsp";
 			
 			//TODO 5 
 			//Create a new CarDTO and set in request with attribute name as 'car'
@@ -150,7 +144,17 @@ public class UserServlet extends HttpServlet {
 			//Set the found cars in request with name as 'carList'
 			//Set the destination page to carList.jsp
             
-        }                    
+        }   else if(SAVE_ACTION.equals(actionName)){
+        	hm.put("Name",request.getParameter("Name"));
+			hm.put("PhoneNumber",request.getParameter("PhoneNumber"));
+			hm.put("Adress",request.getParameter("Adress"));
+			hm.put("DateOfBirth",request.getParameter("DateOfBirth"));
+			hm.put("DateOfJoining",request.getParameter("DateOfJoining"));
+			hm.put("DepartmentID",request.getParameter("DepartmentID"));
+			hm.put("ProjectID",request.getParameter("ProjectID"));
+			hm.put("RoleID",request.getParameter("RoleID"));
+			service.AddEmployee(hm);
+        }                 
         else
         {
             String errorMessage = "[" + actionName + "] is not a valid action.";
